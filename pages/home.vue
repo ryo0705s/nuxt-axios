@@ -3,7 +3,11 @@
     <h1>寄付管理アプリ</h1>
     <h2>寄付情報</h2>
     <ul class="title">
-      <li>寄付先</li>
+      <li>
+        寄付先<input v-model="state.donateFor" /><button @click="add">
+          寄付先を探す
+        </button>
+      </li>
       <li>
         金額<input v-model="state.donation" /><button @click="add">寄付</button>
       </li>
