@@ -57,5 +57,30 @@ router.post("/", function (req, res, next) {
     }
   );
 });
-
+// データ更新用API
+router.put("/:id", function (req, res, next) {
+  const { name, intro } = req.body.donateFor_data;
+  pool.query(
+    "UPDATE donateFor SET name = $1, intro = $2 WHERE id = $3 ",
+    [name, intro, id],
+    function (error, results) {
+      if (error) {
+        res.status(500).json({
+          status: "500 Internal Server Error",
+          error: error,
+        });
+      }
+      if (results.rowCount === 0) {
+        res.status(400).json({
+          status: "400 Bad Request",
+          message: "データが存在しません",
+        });
+      } else {
+        res.status(200).json({
+          status: "success",
+        });
+      }
+    }
+  );
+});
 module.exports = router;
