@@ -65,10 +65,11 @@ router.put("/:id", function (req, res, next) {
     [name, intro, id],
     function (error, results) {
       if (error) {
-        res.status(500).json({
-          status: "500 Internal Server Error",
-          error: error,
-        });
+        res.status(500),
+          json({
+            status: "500 Internal Server Error",
+            error: error,
+          });
       }
       if (results.rowCount === 0) {
         res.status(400).json({
@@ -84,3 +85,32 @@ router.put("/:id", function (req, res, next) {
   );
 });
 module.exports = router;
+
+// データ削除API
+router.delete("/:id", function (req, res, next) {
+  const id = req.params.id;
+  pool.query(
+    "DELETE FROM donateFor WHERE id =$1",
+    [id],
+    function (error, results) {
+      if (error) {
+        res.status(500),
+          json({
+            status: "500 Internel Server Error",
+            error: error,
+          });
+      }
+      if (results.rowCount === 0) {
+        res.status(400).json({
+          status: "400 Bad Request",
+          message: "データが存在しません",
+        });
+      } else {
+        res.sendStatus(200).json({
+          status: "success",
+          message: "データを削除しました",
+        });
+      }
+    }
+  );
+});
