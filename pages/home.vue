@@ -4,7 +4,7 @@
     <h2>寄付情報</h2>
     <ul class="title">
       <li>
-        寄付先<input v-model="state.donateFor" /><button @click="add">
+        寄付先<input v-model="state.donateFor" /><button @click="search">
           寄付先を探す
         </button>
       </li>
@@ -89,6 +89,7 @@ export default {
     const remove = (index) => {
       state.prices.splice(index, 1);
     };
+    const search = () => {};
     return {
       state,
       add,
