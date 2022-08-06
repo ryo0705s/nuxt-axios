@@ -14,4 +14,12 @@ export default {
       console.log(error);
     }
   },
+  async getIdDonateForData(id: string) {
+    try {
+      const response = await myApi.get(`/${id}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
